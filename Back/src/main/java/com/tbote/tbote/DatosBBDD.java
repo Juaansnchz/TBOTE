@@ -21,7 +21,7 @@ public class DatosBBDD {
     private int saldo;
     @Column(name = "respuesta_seg")
     private String respuesta;
-    @OneToMany(mappedBy = "login", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tablaLogin", cascade = CascadeType.ALL)
     private List<Movimientos> listMovs;
 
     public DatosBBDD(){}
@@ -88,5 +88,31 @@ public class DatosBBDD {
 
     public void setListMovs(List<Movimientos> listMovs) {
         this.listMovs = listMovs;
+    }
+
+    public String movsListToJson(){
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("[\n");
+
+        for (int i = 0; i < listMovs.size(); i++) {
+            Movimientos movimiento = listMovs.get(i);
+            jsonBuilder.append("{");
+            jsonBuilder.append("\"id_movs\": ").append(movimiento.getId_movs()).append(", ");
+            jsonBuilder.append("\"nombre\": \"").append(movimiento.getNombre()).append("\", ");
+            jsonBuilder.append("\"dinero\": ").append(movimiento.getDinero()).append(", ");
+            jsonBuilder.append("\"fecha\": \"").append(movimiento.getFecha()).append("\"");
+            jsonBuilder.append("}");
+
+            // Agregar coma si no es el último elemento
+            if (i < listMovs.size() - 1) {
+                jsonBuilder.append(",\n");
+            } else {
+                jsonBuilder.append("\n");
+            }
+        }
+
+        jsonBuilder.append("]");
+
+        return jsonBuilder.toString();
     }
 }
