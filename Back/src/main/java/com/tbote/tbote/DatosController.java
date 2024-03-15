@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -58,6 +59,13 @@ public class DatosController {
         String dni = body.get("dni");
         DataHandling control = new DataHandling();
         return control.verSaldo(dni);
+    }
+
+    @PostMapping(path = "/vermovs")
+    public ResponseEntity<String> verMovs(@RequestBody Map<String, String> body) {
+        String dni = body.get("dni");
+        DataHandling control = new DataHandling();
+        return ResponseEntity.ok(control.verMovimientos(dni));
     }
 
 }
