@@ -214,13 +214,4 @@ public class DataHandling {
             return null;
         }
     }
-
-    public class LocalDateAdapter implements JsonSerializer<LocalDate> {
-        private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        @Override
-        public JsonElement serialize(LocalDate localDate, Type type, JsonSerializationContext jsonSerializationContext) {
-            return new JsonPrimitive(formatter.format(localDate));
-        }
-    }
 }
