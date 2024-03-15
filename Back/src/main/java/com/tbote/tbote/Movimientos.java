@@ -2,6 +2,8 @@ package com.tbote.tbote;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "movs")
 public class Movimientos {
@@ -14,8 +16,10 @@ public class Movimientos {
     @Column(name = "dinero")
     private float dinero;
     @ManyToOne
-    @JoinColumn(name = "ID", referencedColumnName = "login")
+    @JoinColumn(name = "ID", referencedColumnName = "ID")
     private DatosBBDD tablaLogin;
+    @Column(name = "fecha")
+    private LocalDate fecha;
 
 
     public Long getId_movs() {
@@ -48,5 +52,13 @@ public class Movimientos {
 
     public void setTablaLogin(DatosBBDD tablaLogin) {
         this.tablaLogin = tablaLogin;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 }
