@@ -2,6 +2,9 @@ package com.tbote.tbote;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "login")
 public class DatosBBDD {
@@ -18,6 +21,8 @@ public class DatosBBDD {
     private int saldo;
     @Column(name = "respuesta_seg")
     private String respuesta;
+    @OneToMany(mappedBy = "login", cascade = CascadeType.ALL)
+    private List<Movimientos> listMovs;
 
     public DatosBBDD(){}
     public DatosBBDD(String DNI, String passwd, String respuesta) {
@@ -75,5 +80,13 @@ public class DatosBBDD {
                 "\"Saldo\":" + saldo + '\"' +
                 "\"respuesta_seg\":" + respuesta + '\"' +
                 '}';
+    }
+
+    public List<Movimientos> getListMovs() {
+        return listMovs;
+    }
+
+    public void setListMovs(List<Movimientos> listMovs) {
+        this.listMovs = listMovs;
     }
 }
