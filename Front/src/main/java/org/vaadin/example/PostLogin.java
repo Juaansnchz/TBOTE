@@ -90,8 +90,25 @@ public class PostLogin extends VerticalLayout {
                     ui.getSession().setAttribute("dni", data.getDNI()); // Guardar el DNI en la sesión
                     ui.navigate(Saldo.class);
                 });
-            }
+            } else if (btn.equals("btnmovs")) {
+                Datos data = new Datos();
+                String dni = (String) UI.getCurrent().getSession().getAttribute("dni");
+                data.setDNI(dni);
+                getUI().ifPresent(ui -> {
+                    ui.getSession().setAttribute("dni", data.getDNI()); // Guardar el DNI en la sesión
+                    ui.navigate(Movimientos.class);
+                });
 
+            }
+            else if (btn.equals("btnbizum")) {
+                Datos data = new Datos();
+                String dni = (String) UI.getCurrent().getSession().getAttribute("dni");
+                data.setDNI(dni);
+                getUI().ifPresent(ui -> {
+                    ui.getSession().setAttribute("dni", data.getDNI()); // Guardar el DNI en la sesión
+                    ui.navigate(bizum.class);
+                });
+            }
         });
 
         button.addClassName("button");
