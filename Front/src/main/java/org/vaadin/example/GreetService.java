@@ -3,6 +3,7 @@ package org.vaadin.example;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,9 @@ public class GreetService implements Serializable {
 
     }
 
-
+    public List<DatosMovimientos> getMovs(String DNI){
+        API api = new API();
+        return api.movimientos(DNI);
+    }
 }
 

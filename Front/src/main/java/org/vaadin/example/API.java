@@ -1,6 +1,10 @@
 package org.vaadin.example;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,6 +14,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 public class API {
 
@@ -19,6 +24,7 @@ public class API {
     private static final String urlPrefix2 = "http://localhost:8090/login";
     private static final String urlPrefix3 = "http://localhost:8090/newpasswd";
     private static final String urlPrefix4 = "http://localhost:8090/versaldo";
+    private static final String urlPrefix5 = "http://localhost:8090/";
 
     public String createUsuario(String dni, String passwd, String respuesta) throws URISyntaxException, IOException, InterruptedException {
 
@@ -125,6 +131,36 @@ public class API {
         } catch (URISyntaxException | IOException | InterruptedException e) {
             e.printStackTrace(); // Manejo básico de excepciones, imprime la traza en consola
             return "Error en la solicitud: " + e.getMessage();
+        }
+    }
+
+    public List<DatosMovimientos> movimientos(String dni){
+
+        try{
+            // Crear el cuerpo de la solicitud JSON
+            Map<String, String> userData = new HashMap<>();
+            userData.put("dni", dni);
+            String jsonBody = new ObjectMapper().writeValueAsString(userData);
+
+            // Configurar la solicitud HTTP
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(urlPrefix4))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                    .build();
+
+            // Enviar la solicitud HTTP y obtener la respuesta
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            String json = response.body();
+
+            Gson gson = new Gson();
+
+            List<DatosMovimientos> listaMovimientos = null;
+            listaMovimientos = gson.fromJson(json, new TypeToken<List<DatosMovimientos>>() {}.getType());
+
+            return listaMovimientos;
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
