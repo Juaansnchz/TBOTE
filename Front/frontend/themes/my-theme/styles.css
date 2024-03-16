@@ -106,6 +106,7 @@ vaadin-text-field.bordered::part(input-field) {
 .tbote {
   text-align: center;
   color: green;
+  align-items: center;
   font-size: 3.5em;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   margin-top: 0.5em;
@@ -119,7 +120,7 @@ vaadin-text-field.bordered::part(input-field) {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: auto;
   width: 30%!important; /* Ajusta el ancho del contenedor principal */
-  height: 500px;
+  height: auto;
   align-items: flex-start;
   background-color: white;
   color: white !important;
@@ -139,7 +140,7 @@ vaadin-text-field.bordered::part(input-field) {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  background-color: green;
+  background-color: rgb(40, 167, 69, 0.5);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -156,6 +157,7 @@ vaadin-text-field.bordered::part(input-field) {
 
 
 }
+/* css recuperarContraseña */
 .recuperarcontainer{
   border: 2px solid #333;
   border-radius: 10px;
@@ -224,4 +226,71 @@ vaadin-text-field.bordered::part(input-field) {
 .recover-password-button:hover {
   background-color: #333333;
   color: #ffffff;
+}
+
+/* css clase Movimientos */
+.contenedorMov {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  width: 35% !important; /* Ajusta el ancho del contenedor principal */
+  height: auto!important;
+  align-items: center;
+  background-color: white;
+  color: white !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.titulo{
+  text-align: center;
+  color: green;
+  font-size: 3.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 0.5em;
+  align-self: center;
+}
+.Saldo{
+  margin-top: 2em;
+  font-size: 2em;
+}
+.saldoN{
+  margin-bottom: auto;
+  font-size: 3.5em;
+}
+/* Css clase movimientos*/
+.Mov_grid{
+
+  color: black;
+}
+.volver{
+  align-self: flex-start!important;
+}
+.Movimientos{
+  margin-left: 1.3em;
+}
+.cerrarSesionbtn {
+  background-color: #d9534f;
+  border: 2px solid #ffffff; /* Cambiado a rojo */
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #ffffff; /* Cambiado a rojo */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  align-self: center;
+
+}
+
+.cerrarSesionbtn:hover {
+  background-color: #ffffff; /* Cambiado a rojo */
+  color: #d9534f;
+}
+
+
+.cerrarSesionbtn::before {
+  content: "\2190"; /* Código de la flecha izquierda Unicode */
+  margin-right: 10px;
 }

@@ -4,6 +4,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.notification.Notification;
@@ -54,6 +56,8 @@ public class PostLogin extends VerticalLayout {
         ayuda.addClassName("alinea-texto-boton");
 
 
+
+
         Button button1 = createButton("./themes/img/dinero.png", "btnsaldo");
         Button button2 = createButton("./themes/img/arrow.png", "btnmovs");
         Button button3 = createButton("./themes/img/enviar-dinero.png", "btnbizum");
@@ -64,8 +68,15 @@ public class PostLogin extends VerticalLayout {
         contenedor3.add(button3,bizum);
         contenedor4.add(button4,ayuda);
 
+        Button Volver = new Button("Cerrar Sesión");
+        Volver.addClassName("cerrarSesionbtn");
+        Volver.addClickListener(e -> {
+            getUI().ifPresent(ui -> ui.navigate(MainView.class));
+            Notification.show("Volver atrás pulsado");
+        });
 
-        contenedor.add(contenedor1,contenedor2,contenedor3,contenedor4);
+
+        contenedor.add(contenedor1,contenedor2,contenedor3,contenedor4,Volver);
 
         // Agregar contenedor de registro al diseño principal
         add(contenedor);
@@ -90,8 +101,25 @@ public class PostLogin extends VerticalLayout {
                     ui.getSession().setAttribute("dni", data.getDNI()); // Guardar el DNI en la sesión
                     ui.navigate(Saldo.class);
                 });
-            }
+            } else if (btn.equals("btnmovs")) {
+                Datos data = new Datos();
+                String dni = (String) UI.getCurrent().getSession().getAttribute("dni");
+                data.setDNI(dni);
+                getUI().ifPresent(ui -> {
+                    ui.getSession().setAttribute("dni", data.getDNI()); // Guardar el DNI en la sesión
+                    ui.navigate(Movimientos.class);
+                });
 
+            }
+            else if (btn.equals("btnbizum")) {
+                Datos data = new Datos();
+                String dni = (String) UI.getCurrent().getSession().getAttribute("dni");
+                data.setDNI(dni);
+                getUI().ifPresent(ui -> {
+                    ui.getSession().setAttribute("dni", data.getDNI()); // Guardar el DNI en la sesión
+                    ui.navigate(bizum.class);
+                });
+            }
         });
 
         button.addClassName("button");
