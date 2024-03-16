@@ -10,7 +10,7 @@ public class DatosMovimientos {
 
     private float dinero;
 
-    private LocalDate fecha;
+    private String fecha;
 
     private int id;
 
@@ -41,11 +41,11 @@ public class DatosMovimientos {
         this.dinero = dinero;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

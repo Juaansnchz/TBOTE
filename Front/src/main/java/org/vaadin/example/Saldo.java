@@ -1,6 +1,7 @@
 package org.vaadin.example;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
@@ -10,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -36,11 +38,20 @@ public class Saldo extends VerticalLayout {
             // Obtener el saldo para el DNI ingresado
             String dni = (String) UI.getCurrent().getSession().getAttribute("dni");
             String versaldo = service.getSaldo(dni);
-            H4 saldo = new H4(versaldo);
+            H4 saldo = new H4(versaldo + "€");
+            saldo.addClassName("saldoN");
             contenedorMov.add(saldo);
         } catch (URISyntaxException | IOException | InterruptedException ex) {
             Notification.show("Error al obtener el saldo: " + ex.getMessage());
         }
+
+        Button VolverPost = new Button("Volver");
+        VolverPost.addClickListener(e -> {
+            getUI().ifPresent(ui -> ui.navigate(PostLogin.class));
+            Notification.show("Volver atrás pulsado");
+        });
+        contenedorMov.add(VolverPost);
+
 
 
 

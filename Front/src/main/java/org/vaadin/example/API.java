@@ -24,7 +24,7 @@ public class API {
     private static final String urlPrefix2 = "http://localhost:8090/login";
     private static final String urlPrefix3 = "http://localhost:8090/newpasswd";
     private static final String urlPrefix4 = "http://localhost:8090/versaldo";
-    private static final String urlPrefix5 = "http://localhost:8090/";
+    private static final String urlPrefix5 = "http://localhost:8090/vermovs";
 
     public String createUsuario(String dni, String passwd, String respuesta) throws URISyntaxException, IOException, InterruptedException {
 
@@ -141,22 +141,25 @@ public class API {
             Map<String, String> userData = new HashMap<>();
             userData.put("dni", dni);
             String jsonBody = new ObjectMapper().writeValueAsString(userData);
-
+            System.out.println(jsonBody);
             // Configurar la solicitud HTTP
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(urlPrefix4))
+                    .uri(new URI(urlPrefix5))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
 
             // Enviar la solicitud HTTP y obtener la respuesta
-            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String json = response.body();
-
             Gson gson = new Gson();
 
-            List<DatosMovimientos> listaMovimientos = null;
-            listaMovimientos = gson.fromJson(json, new TypeToken<List<DatosMovimientos>>() {}.getType());
+            List<DatosMovimientos> listaMovimientos = gson.fromJson(json, new TypeToken<List<DatosMovimientos>>() {}.getType());
+            if (listaMovimientos != null) {
+                System.out.println("Lista:" + listaMovimientos.toString());
+            } else {
+                System.out.println("La lista de movimientos es nula.");
+            }
 
             return listaMovimientos;
         } catch (URISyntaxException | IOException | InterruptedException e) {
