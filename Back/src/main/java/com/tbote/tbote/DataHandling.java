@@ -1,17 +1,23 @@
 package com.tbote.tbote;
 
+import com.google.gson.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.http.HttpStatus;
 
+import java.lang.reflect.Type;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataHandling {
     public boolean createUsuario(String dni, String passwd, String respuesta) {
-        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).buildSessionFactory();
+        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).addAnnotatedClass(Movimientos.class).buildSessionFactory();
              Session session = sessionFactory.openSession()) {
 
             session.beginTransaction();
@@ -46,7 +52,7 @@ public class DataHandling {
 
 
     public DatosBBDD autenticarUsuario(String dni, String passwd) {
-        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).buildSessionFactory();
+        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).addAnnotatedClass(Movimientos.class).buildSessionFactory();
              Session session = sessionFactory.openSession()) {
 
             session.beginTransaction();
@@ -79,7 +85,7 @@ public class DataHandling {
 
 
     public boolean updateUsuario(String dni, String new_passwd, String respuesta) {
-        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).buildSessionFactory();
+        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).addAnnotatedClass(Movimientos.class).buildSessionFactory();
              Session session = sessionFactory.openSession()) {
 
             session.beginTransaction();
@@ -114,7 +120,7 @@ public class DataHandling {
 
 
     public DatosBBDD getUsuario(String dni) {
-        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).buildSessionFactory();
+        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).addAnnotatedClass(Movimientos.class).buildSessionFactory();
              Session session = sessionFactory.openSession()) {
 
             session.beginTransaction();
@@ -157,7 +163,7 @@ public class DataHandling {
     }
 
     public int verSaldo(String dni) {
-        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).buildSessionFactory();
+        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).addAnnotatedClass(Movimientos.class).buildSessionFactory();
              Session session = sessionFactory.openSession()) {
 
             session.beginTransaction();
@@ -178,6 +184,34 @@ public class DataHandling {
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    public String verMovimientos(String dni){
+        try (SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(DatosBBDD.class).addAnnotatedClass(Movimientos.class).buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+
+            session.beginTransaction();
+
+
+            // Utilizamos HQL (Hibernate Query Language) para buscar el usuario por DNI
+            Query query = session.createQuery("FROM Movimientos WHERE tablaLogin.id = (Select id FROM DatosBBDD WHERE DNI = :dni)");
+            query.setParameter("dni", dni);
+            List<Movimientos> ListaMovimientos = (List<Movimientos>) query.list();
+
+            session.getTransaction().commit();
+
+            if (!ListaMovimientos.isEmpty()) {
+                DatosBBDD aux = new DatosBBDD();
+                aux.setListMovs(ListaMovimientos);
+
+                return aux.movsListToJson();
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
