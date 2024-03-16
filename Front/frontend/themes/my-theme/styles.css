@@ -1,0 +1,296 @@
+/*
+   CSS styling examples for the Vaadin app.
+
+   Visit https://vaadin.com/docs/styling/application-theme/ for more information.
+*/
+
+/* Example: CSS class name to center align the content . */
+.centered-content {
+  margin: 0 auto;
+  max-width: 250px;
+}
+
+/* Example: the style is applied only to the textfields which have the `bordered` class name. */
+vaadin-text-field.bordered::part(input-field) {
+  box-shadow: inset 0 0 0 1px var(--lumo-contrast-30pct);
+  background-color: var(--lumo-base-color);
+}
+.register-button{
+  font-size: 1.2em;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(40, 167, 69, 0.5);
+  color: white; /* Cambiar el color del texto a blanco */
+}
+.register-button:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.registro {
+  background-color: rgba(40, 167, 69, 0.5);
+}
+
+.registration-container {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  max-width: 600px;
+  background-color: #ffffff;
+}
+
+.back-button {
+  background-color: #d9534f;
+  border: 2px solid #ffffff; /* Cambiado a rojo */
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #ffffff; /* Cambiado a rojo */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #ffffff; /* Cambiado a rojo */
+  color: #d9534f;
+}
+
+
+.back-button::before {
+  content: "\2190"; /* Código de la flecha izquierda Unicode */
+  margin-right: 10px;
+}
+
+.title {
+  font-family: Arial, sans-serif;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin: 20px auto; /* Ajuste de margen para centrar verticalmente y horizontalmente */
+}
+
+.logo {
+  max-width: 200px;
+  display: block;
+  margin: 20px auto; /* Ajuste de margen para centrar verticalmente y horizontalmente */
+}
+
+
+
+.fields-layout {
+  spacing: true;
+  width: 100%;
+}
+
+.left-column {
+  width: 50%;
+}
+
+.right-column {
+  width: 50%;
+}
+
+.register-button {
+  font-size: 1.2em;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(40, 167, 69, 0.5);
+}
+
+/* CSS de la clase PostLogin*/
+.tbote {
+  text-align: center;
+  color: green;
+  align-items: center;
+  font-size: 3.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 0.5em;
+
+}
+
+.contenedor {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  width: 30%!important; /* Ajusta el ancho del contenedor principal */
+  height: auto;
+  align-items: flex-start;
+  background-color: white;
+  color: white !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contenedor1, .contenedor2,.contenedor3,.contenedor4{
+  width: auto!important;
+}
+
+/* Ajustes para el botón */
+.button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background-color: rgb(40, 167, 69, 0.5);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.alinea-texto-boton {
+  height: 2em;
+  margin-top: 2em;
+
+
+
+}
+/* css recuperarContraseña */
+.recuperarcontainer{
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  max-width: 600px;
+  background-color: #ffffff;
+}
+.login {
+  background-color: rgba(40, 167, 69, 0.5);
+}
+.login-container {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  max-width: 400px;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+
+.title {
+  font-family: Arial, sans-serif;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.new-password-field,
+.confirm-new-password-field,
+.username-field,
+.password-field {
+
+  padding: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  font-size: 1.2em;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(40, 167, 69, 0.5);
+  color: white; /* Cambiar el color del texto a blanco */
+}
+
+.recuperar-contraseña {
+  background-color: rgba(40, 167, 69, 0.5);
+}
+
+
+.recover-password-button {
+  font-size: 1.2em;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(40, 167, 69, 0.5);
+  color: white; /* Cambiar el color del texto a blanco */
+}
+
+.recover-password-button:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* css clase Movimientos */
+.contenedorMov {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  width: 35% !important; /* Ajusta el ancho del contenedor principal */
+  height: auto!important;
+  align-items: center;
+  background-color: white;
+  color: white !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.titulo{
+  text-align: center;
+  color: green;
+  font-size: 3.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 0.5em;
+  align-self: center;
+}
+.Saldo{
+  margin-top: 2em;
+  font-size: 2em;
+}
+.saldoN{
+  margin-bottom: auto;
+  font-size: 3.5em;
+}
+/* Css clase movimientos*/
+.Mov_grid{
+
+  color: black;
+}
+.volver{
+  align-self: flex-start!important;
+}
+.Movimientos{
+  margin-left: 1.3em;
+}
+.cerrarSesionbtn {
+  background-color: #d9534f;
+  border: 2px solid #ffffff; /* Cambiado a rojo */
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #ffffff; /* Cambiado a rojo */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  align-self: center;
+
+}
+
+.cerrarSesionbtn:hover {
+  background-color: #ffffff; /* Cambiado a rojo */
+  color: #d9534f;
+}
+
+
+.cerrarSesionbtn::before {
+  content: "\2190"; /* Código de la flecha izquierda Unicode */
+  margin-right: 10px;
+}
