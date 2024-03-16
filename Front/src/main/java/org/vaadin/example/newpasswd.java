@@ -73,13 +73,8 @@ public class newpasswd extends VerticalLayout {
             String respuesta = securityAnswerField.getValue();
             String confirmPassword = confirmPasswordField.getValue();
 
-            Datos data = new Datos();
-            data.setDNI(username);
-            data.setPasswd(newPassword);
-            data.setConfirmPassword(confirmPassword);
-            data.setRespuesta(respuesta);
-
-            if (username.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            // Verificar si algún campo está vacío
+            if (username.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty() || respuesta.isEmpty()) {
                 Notification.show("Por favor, complete todos los campos.");
                 return;
             }
@@ -88,6 +83,12 @@ public class newpasswd extends VerticalLayout {
                 Notification.show("Las contraseñas no coinciden.");
                 return;
             }
+
+            Datos data = new Datos();
+            data.setDNI(username);
+            data.setPasswd(newPassword);
+            data.setConfirmPassword(confirmPassword);
+            data.setRespuesta(respuesta);
 
             try {
                 if (service.updateUsuario(data.getDNI(), data.getPasswd(), data.getRespuesta()).equals("(POST http://localhost:8090/newpasswd) 200")) {
@@ -101,6 +102,7 @@ public class newpasswd extends VerticalLayout {
             }
         });
         button.addClassName("recover-password-button");
+
 
         // Agregar componentes al diseño principal
         fieldsLayout.add(leftColumn, rightColumn);

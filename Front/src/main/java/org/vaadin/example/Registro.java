@@ -92,35 +92,36 @@ public class Registro extends VerticalLayout {
             data.setDNI(DNI);
             String respuesta = securityAnswerField.getValue();
             data.setRespuesta(respuesta);
-            if (!formatoDniCorrecto(DNI)) {
-                //throw new RuntimeException("Error al insertar datos. El formato del DNI no es válido.");
-                Notification.show("Error: El formato del DNI no es válido.");
-                error = false;
-            }
-            if (!contra1.equals(contra2)){
 
-                Notification.show("Error: Las contraseñas no coinciden.");
-                error = false;
-            }
-            if(passwordField.isEmpty()||confirmPasswordField.isEmpty()||dniField.isEmpty()){
+            // Verificar que todos los campos estén completos
+            if (DNI.isEmpty() || contra1.isEmpty() || contra2.isEmpty() || respuesta.isEmpty()) {
                 Notification.show("Error: Complete todos los campos.");
                 error = false;
             }
-            //if(!dniField.equals("\\d{8}[A-HJ-NP-TV-Z]")){ Notification.show("Error: Introduce un DNI correcto.");}
+
+            if (!formatoDniCorrecto(DNI)) {
+                Notification.show("Error: El formato del DNI no es válido.");
+                error = false;
+            }
+
+            if (!contra1.equals(contra2)) {
+                Notification.show("Error: Las contraseñas no coinciden.");
+                error = false;
+            }
+
             try {
-                if (error){
-                    if(service.createUsuario(data.getDNI(), data.getPasswd(), data.getRespuesta()).equals("(POST http://localhost:8090/registro) 200"))
-                    {
+                if (error) {
+                    if (service.createUsuario(data.getDNI(), data.getPasswd(), data.getRespuesta()).equals("(POST http://localhost:8090/registro) 200")) {
                         Notification.show("¡Registro exitoso para el usuario: " + data.getDNI());
                         getUI().ifPresent(ui -> ui.navigate(MainView.class));
                     } else {
                         Notification.show("Error: El usuario no se pudo registrar");
-                    }}
-
+                    }
+                }
             } catch (URISyntaxException | InterruptedException | IOException ex) {
                 System.err.println("Error creando usuario: " + ex.getMessage());
                 ex.printStackTrace();
-            }
+    }
         });
         button.addClassName("register-button");
         registrationContainer.add(button);
